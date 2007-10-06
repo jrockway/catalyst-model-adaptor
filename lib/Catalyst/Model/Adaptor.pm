@@ -1,36 +1,14 @@
 package Catalyst::Model::Adaptor;
 use strict;
 use warnings;
-use base 'Catalyst::Model';
-use Carp;
-
-use Class::C3;
+use base 'Catalyst::Model::Adaptor::Base';
 
 sub COMPONENT {
-    my ($class, $app, $config, @rest) = @_;
-    my $self = $class->next::method($app, $config, @rest);
+    my ($class, $app, @rest) = @_;
+    my $self = $class->next::method($app, @rest);
     
-    # setup adapted class' args
-    my $args = $self->prepare_arguments($app);
-    
-    # get class 
-    croak 'need class' unless $self->{class};
-    my $adapted_class = $self->{class};
-    my $constructor   = $self->{constructor} || 'new';
-
-    # load class, create instance
-    eval "require $adapted_class" or die "failed to require $adapted_class: $@";
-    return $adapted_class->$constructor($self->mangle_arguments($args));
-}
-
-sub prepare_arguments {
-    my ($self, $app) = @_;
-    return $self->{args};
-}
-
-sub mangle_arguments {
-    my ($self, $args) = @_;
-    return $args;
+    $self->_load_adapted_class;
+    return $self->_create_instance($app);
 }
 
 1;
@@ -38,7 +16,7 @@ __END__
 
 =head1 NAME
 
-Catalyst::Model::Adaptor - use a Perl class as a Catalyst model
+Catalyst::Model::Adaptor - use a plain class as a Catalyst model
 
 =head1 SYNOPSIS
 
