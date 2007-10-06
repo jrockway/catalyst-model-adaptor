@@ -27,8 +27,9 @@ instantiating it every time it is requested
 
 =head1 SYNOPSIS
 
-This module works just like L<Catalyst::Model::Adaptor>, except that
-a fresh instance of your adapted class is created every time it is 
+This module works just like
+L<Catalyst::Model::Adaptor|Catalyst::Model::Adaptor>, except that a
+fresh instance of your adapted class is created every time it is
 requested via C<< $c->model >>.
 
 =head1 METHODS

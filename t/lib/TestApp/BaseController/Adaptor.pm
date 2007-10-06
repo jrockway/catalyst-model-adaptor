@@ -10,6 +10,11 @@ sub is_a :Path(isa) {
     $c->res->body(ref $c->model($self->model));
 }
 
+sub id :Local {
+    my ($self, $c) = @_;
+    $c->res->body($c->model($self->model)->id);
+}
+
 sub id_twice :Local {
     my ($self, $c) = @_;
     $c->res->body(join '|', map { $c->model($self->model)->id } 1..2);
