@@ -4,6 +4,8 @@ use warnings;
 
 use base 'Catalyst::Model::Factory';
 
+our $VERSION = '0.01';
+
 sub ACCEPT_CONTEXT {
     my ($self, $context) = @_;
 

@@ -3,6 +3,8 @@ use strict;
 use warnings;
 use base 'Catalyst::Model::Adaptor::Base';
 
+our $VERSION = '0.01';
+
 sub COMPONENT {
     my ($class, $app, @rest) = @_;
     my $self = $class->next::method($app, @rest);

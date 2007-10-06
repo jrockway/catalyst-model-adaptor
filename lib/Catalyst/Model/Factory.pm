@@ -4,6 +4,8 @@ use warnings;
 
 use base 'Catalyst::Model::Adaptor::Base';
 
+our $VERSION = '0.01';
+
 sub COMPONENT {
     my ($class, @args) = @_;
     my $self = $class->next::method(@args);
