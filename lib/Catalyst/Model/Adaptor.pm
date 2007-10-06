@@ -127,6 +127,12 @@ There are no methods that you call directly.  When you call C<<
 $c->model >> on a model that subclasses this, you'll get back an
 instance of the class being adapted, not this model.
 
+These methods are called by Catalyst:
+
+=head2 COMPONENT
+
+Setup this component.
+
 =head1 CUSTOMIZING THE PROCESS
 
 By default, the instance of your adapted class is instantiated like

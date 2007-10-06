@@ -23,7 +23,7 @@ sub _create_instance {
     my $constructor = $self->{constructor} || 'new';
     my $args = $self->prepare_arguments($app);
     my $adapted_class = $self->{class};
-
+    
     return $adapted_class->$constructor($self->mangle_arguments($args));
 }
 

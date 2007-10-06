@@ -10,7 +10,7 @@ sub is_a :Path(isa) {
     $c->res->body(ref $c->model($self->model));
 }
 
-sub try_twice :Local {
+sub id_twice :Local {
     my ($self, $c) = @_;
     $c->res->body(join '|', map { $c->model($self->model)->id } 1..2);
 }
@@ -18,6 +18,11 @@ sub try_twice :Local {
 sub count :Local {
     my ($self, $c) = @_;
     $c->res->body($c->model($self->model)->count);
+}
+
+sub count_twice :Local {
+    my ($self, $c) = @_;
+    $c->res->body(join '|', map { $c->model($self->model)->count } 1..2);
 }
 
 sub foo :Local {

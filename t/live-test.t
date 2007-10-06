@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Test::More tests => 12;
+use Test::More tests => 28;
 
 # setup library path
 use FindBin qw($Bin);
@@ -17,17 +17,23 @@ my $mech = Test::WWW::Mechanize::Catalyst->new;
 $mech->get_ok('http://localhost/', 'get main page');
 $mech->content_like(qr/it works/i, 'see if it has our text');
 
-$mech->get_ok('http://localhost/adaptor/isa', 'get the class name');
-$mech->content_like(qr/^TestApp::Backend::SomeClass$/, 'adapted class is itself');
-
-$mech->get_ok('http://localhost/adaptor/try_twice', 'get try_twice');
+# adaptor
 {
+    $mech->get_ok('http://localhost/adaptor/isa', 'get the class name');
+    $mech->content_like(qr/^TestApp::Backend::SomeClass$/, 
+                        'adapted class is itself');
+}
+
+{
+    $mech->get_ok('http://localhost/adaptor/id_twice', 'get id_twice');
     my ($a, $b) = split /\|/, $mech->content; 
     is $a, $b, 'same instance both times';
 }
 
-$mech->get_ok('http://localhost/adaptor/foo', 'get foo');
-$mech->content_like(qr/^bar$/, 'Adapted class is itself');
+{
+    $mech->get_ok('http://localhost/adaptor/foo', 'get foo');
+    $mech->content_like(qr/^bar$/, 'got foo = bar');
+}
 
 {
     $mech->get_ok('http://localhost/adaptor/count', 'get count');
@@ -37,3 +43,43 @@ $mech->content_like(qr/^bar$/, 'Adapted class is itself');
     
     is $b, $a+1, 'same instance across requests';
 }
+{
+    $mech->get_ok('http://localhost/adaptor/count_twice', 'get count_twice');
+    my ($a, $b) = split/\|/, $mech->content;
+    is $a, 2, '2 count for a';
+    is $b, 3, '3 count for b';
+}
+
+# factory
+{
+    $mech->get_ok('http://localhost/factory/isa', 'get the class name');
+    $mech->content_like(qr/^TestApp::Backend::SomeClass$/, 
+                        'adapted class is itself');
+}
+
+{
+    $mech->get_ok('http://localhost/factory/id_twice', 'get id_twice');
+    my ($a, $b) = split /\|/, $mech->content; 
+    is $b, $a+1, 'different instance both times';
+}
+
+{
+    $mech->get_ok('http://localhost/factory/foo', 'get foo');
+    $mech->content_like(qr/^baz$/, 'got foo = baz');
+}
+{
+    $mech->get_ok('http://localhost/factory/count', 'get count');
+    my $a = $mech->content;
+    $mech->get_ok('http://localhost/factory/count', 'get count (+1)');
+    my $b = $mech->content;
+
+    is $a, 0, '0th request for a';
+    is $b, 0, '0th request for b too';
+}
+{
+    $mech->get_ok('http://localhost/factory/count_twice', 'get count_twice');
+    my ($a, $b) = split/\|/, $mech->content;
+    is $a, 0, '0 count for a';
+    is $a, 0, '0 count for b too';
+}
+

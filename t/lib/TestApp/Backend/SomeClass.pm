@@ -2,9 +2,12 @@ package TestApp::Backend::SomeClass;
 use strict;
 use warnings;
 
+my $id = 0;
+
 sub new {
     my ($class, $args) = @_;
-    return bless $args, $class;
+    $id++;
+    return bless {%$args, count => 0}, $class;
 }
 
 sub count {
@@ -13,11 +16,11 @@ sub count {
 }
 
 sub id { 
-    return "$_[0]"
+    return $id;
 }
 
 sub foo { 
-    return shift->{foo}
+    return shift->{foo};
 }
 
 1;
