@@ -34,6 +34,12 @@ L<Catalyst::Model::Adaptor|Catalyst::Model::Adaptor>, except that a
 fresh instance of your adapted class is created every time it is
 requested via C<< $c->model >>.
 
+=head1 CUSTOMIZING
+
+You can customize your subclass just like
+L<Catalyst::Model::Adaptor|Catalyst::Model::Adaptor>.  Instead of
+C<$app>, though, you'll get C<$c>, the current request context.
+
 =head1 METHODS
 
 These methods are called by Catalyst, not by you:
