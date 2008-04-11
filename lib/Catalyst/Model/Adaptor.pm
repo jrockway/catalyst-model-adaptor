@@ -141,7 +141,7 @@ By default, the instance of your adapted class is instantiated like
 this:
 
     my $args = $self->prepare_arguments($app); # $app sometimes called $c
-    $adapted_class->$constructor($self->mangle_args($args));
+    $adapted_class->$constructor($self->mangle_arguments($args));
 
 Since a static hashref of arguments may not be what C<$class> needs,
 you can override the following methods to change what C<$args> is.
