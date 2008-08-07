@@ -2,11 +2,18 @@
 
 use strict;
 use warnings;
-use Test::More tests => 47;
+use Test::More;
 
 # setup library path
 use FindBin qw($Bin);
 use lib "$Bin/lib";
+
+BEGIN {
+    plan skip_all => 'this test needs Test::WWW::Mechanize::Catalyst'
+      unless eval "require Test::WWW::Mechanize::Catalyst";
+
+    plan tests => 47;
+}
 
 # make sure testapp works
 use ok 'TestApp';
@@ -20,13 +27,13 @@ $mech->content_like(qr/it works/i, 'see if it has our text');
 # adaptor
 {
     $mech->get_ok('http://localhost/adaptor/isa', 'get the class name');
-    $mech->content_like(qr/^TestApp::Backend::SomeClass$/, 
+    $mech->content_like(qr/^TestApp::Backend::SomeClass$/,
                         'adapted class is itself');
 }
 
 {
     $mech->get_ok('http://localhost/adaptor/id_twice', 'get id_twice');
-    my ($a, $b) = split /\|/, $mech->content; 
+    my ($a, $b) = split /\|/, $mech->content;
     is $a, $b, 'same instance both times';
 
     $mech->get_ok('http://localhost/adaptor/id', 'get id');
@@ -43,7 +50,7 @@ $mech->content_like(qr/it works/i, 'see if it has our text');
     my $a = $mech->content;
     $mech->get_ok('http://localhost/adaptor/count', 'get count (+1)');
     my $b = $mech->content;
-    
+
     is $b, $a+1, 'same instance across requests';
 }
 {
@@ -56,13 +63,13 @@ $mech->content_like(qr/it works/i, 'see if it has our text');
 # factory
 {
     $mech->get_ok('http://localhost/factory/isa', 'get the class name');
-    $mech->content_like(qr/^TestApp::Backend::SomeClass$/, 
+    $mech->content_like(qr/^TestApp::Backend::SomeClass$/,
                         'adapted class is itself');
 }
 
 {
     $mech->get_ok('http://localhost/factory/id_twice', 'get id_twice');
-    my ($a, $b) = split /\|/, $mech->content; 
+    my ($a, $b) = split /\|/, $mech->content;
     is $b, $a+1, 'different instance both times';
 
     $mech->get_ok('http://localhost/factory/id', 'get id');
@@ -93,13 +100,13 @@ $mech->content_like(qr/it works/i, 'see if it has our text');
 # per_request
 {
     $mech->get_ok('http://localhost/perrequest/isa', 'get the class name');
-    $mech->content_like(qr/^TestApp::Backend::SomeClass$/, 
+    $mech->content_like(qr/^TestApp::Backend::SomeClass$/,
                         'adapted class is itself');
 }
 
 {
     $mech->get_ok('http://localhost/perrequest/id_twice', 'get id_twice');
-    my ($a, $b) = split /\|/, $mech->content; 
+    my ($a, $b) = split /\|/, $mech->content;
     is $a, $b, 'same instance both times';
 
     $mech->get_ok('http://localhost/perrequest/id', 'get id');

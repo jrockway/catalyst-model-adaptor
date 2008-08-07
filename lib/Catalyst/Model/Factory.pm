@@ -4,7 +4,7 @@ use warnings;
 
 use base 'Catalyst::Model::Adaptor::Base';
 
-our $VERSION = '0.01';
+our $VERSION = '0.03';
 
 sub COMPONENT {
     my ($class, @args) = @_;
@@ -19,7 +19,7 @@ sub ACCEPT_CONTEXT {
     return $self->_create_instance($context);
 }
 
-1; 
+1;
 __END__
 
 =head1 NAME

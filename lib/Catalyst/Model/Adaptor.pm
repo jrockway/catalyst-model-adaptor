@@ -3,12 +3,12 @@ use strict;
 use warnings;
 use base 'Catalyst::Model::Adaptor::Base';
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub COMPONENT {
     my ($class, $app, @rest) = @_;
     my $self = $class->next::method($app, @rest);
-    
+
     $self->_load_adapted_class;
     return $self->_create_instance($app);
 }
@@ -38,7 +38,7 @@ Then you can use C<NotMyApp::Class> from your Catalyst app:
 
     sub action :Whatever {
         my ($self, $c) = @_;
-        my $someclass = $c->model('SomeClass'); 
+        my $someclass = $c->model('SomeClass');
         $someclass->method; # yay
     }
 
@@ -71,7 +71,7 @@ bit of sugar, but no actual functionality.  Everything important
 happens in the C<DBIx::Class::Schema> object.
 
 The end result of that is that you can use your app's DBIC schema without
-ever thinking about Catalyst.  This is a Good Thing.  
+ever thinking about Catalyst.  This is a Good Thing.
 
 Catalyst is glue, not a way of life!
 
@@ -85,7 +85,7 @@ can be hard-coded like:
    __PACKAGE__->config( class => 'NotMyApp::SomeClass' );
 
 Or be specified as application config:
-   
+
    package MyApp;
    MyApp->config->{'Model::SomeClass'} = { class => 'NotMyApp::SomeClass' };
 
@@ -186,7 +186,7 @@ write the model yourself.
 If you need a new instance returned each time C<< $c->model >> is called,
 use L<Catalyst::Model::Factory|Catalyst::Model::Factory> instead.
 
-If you need to have exactly one instance created per request, use 
+If you need to have exactly one instance created per request, use
 L<Catalyst::Model::Factory::PerRequest|Catalyst::Model::Factory::PerRequest>
 instead.
 
