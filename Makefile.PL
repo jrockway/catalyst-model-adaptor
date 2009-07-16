@@ -9,4 +9,6 @@ build_requires 'Catalyst::Runtime';
 build_requires 'Test::More';
 build_requires 'ok';
 
+repository 'http://github.com/jrockway/catalyst-model-adaptor';
+
 WriteAll();
