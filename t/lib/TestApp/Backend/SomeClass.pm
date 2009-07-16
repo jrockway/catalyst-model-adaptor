@@ -1,26 +1,20 @@
 package TestApp::Backend::SomeClass;
-use strict;
-use warnings;
+use Moose;
 
 my $id = 0;
 
-sub new {
-    my ($class, $args) = @_;
-    $id++;
-    return bless {%$args, count => 0}, $class;
-}
+sub BUILD { $id++; }
 
+has _count => ( is => 'rw', isa => 'Int', default => 0 );
 sub count {
     my $self = shift;
-    return $self->{count}++;
+    return $self->_count($self->_count+1);
 }
 
-sub id { 
+sub id {
     return $id;
 }
 
-sub foo { 
-    return shift->{foo};
-}
+has foo => ( is => 'ro' );
 
 1;

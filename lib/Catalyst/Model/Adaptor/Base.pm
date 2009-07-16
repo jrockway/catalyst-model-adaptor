@@ -9,27 +9,27 @@ use base 'Catalyst::Model';
 
 sub _load_adapted_class {
     my ($self) = @_;
-    
+
     croak 'need class' unless $self->{class};
     my $adapted_class = $self->{class};
     eval "require $adapted_class" or die "failed to require $adapted_class: $@";
-    
+
     return $adapted_class;
 }
 
 sub _create_instance {
     my ($self, $app) = @_;
- 
+
     my $constructor = $self->{constructor} || 'new';
     my $args = $self->prepare_arguments($app);
     my $adapted_class = $self->{class};
-    
+
     return $adapted_class->$constructor($self->mangle_arguments($args));
 }
 
 sub prepare_arguments {
     my ($self, $app) = @_;
-    return $self->{args};
+    return $self->{args} || {};
 }
 
 sub mangle_arguments {
@@ -47,7 +47,7 @@ Catalyst::Model::Adaptor::Base - internal base class for Catalyst::Model::Adapto
 
 =head1 SYNOPSIS
 
-    # There are no user-serviceable parts in here. 
+    # There are no user-serviceable parts in here.
 
 =head1 METHODS
 

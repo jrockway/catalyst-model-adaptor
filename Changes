@@ -1,5 +1,9 @@
 Change history for Catalyst::Model::Adaptor
 
+0.04   16 July 2008
+       - If no arguments are supplied, then construct new objects with {}
+         by default, rather than undef, as Moose classes fail if given undef.
+
 0.03   6 August 2008
        - make TWMC optional, since it can't pass its test anymore
 
