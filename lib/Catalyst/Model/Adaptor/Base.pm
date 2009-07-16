@@ -29,7 +29,7 @@ sub _create_instance {
 
 sub prepare_arguments {
     my ($self, $app) = @_;
-    return $self->{args} || {};
+    return exists $self->{args} ? $self->{args} : {};
 }
 
 sub mangle_arguments {
