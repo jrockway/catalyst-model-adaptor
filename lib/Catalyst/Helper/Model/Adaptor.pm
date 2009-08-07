@@ -10,7 +10,7 @@ Catalyst::Helper::Model::Adaptor - helper for the incredibly lazy
 
 Running:
 
-    catalyst.pl model SomeClass Adaptor MyApp::Backend::SomeClass create
+    ./script/myapp_create.pl model SomeClass Adaptor MyApp::Backend::SomeClass create
 
 Will create C<YourApp::Model::SomeClass> that looks like:
 
@@ -30,7 +30,7 @@ Why you need a script to generate that is beyond me, but here it is.
 
 =head1 ARGUMENTS
 
-   catalyst.pl model <model_name> Adaptor <class> [<constructor>]
+   ./script/myapp_create.pl model <model_name> Adaptor <class> [<constructor>]
 
 You need to sepecify the C<model_name> (the name of the model), and
 C<class>, the class being adapted.  If C<< $class->new >> isn't going
