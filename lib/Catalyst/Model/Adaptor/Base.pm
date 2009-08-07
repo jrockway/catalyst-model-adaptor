@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 use Carp;
-use Class::C3;
+use MRO::Compat;
 
 use base 'Catalyst::Model';
 
