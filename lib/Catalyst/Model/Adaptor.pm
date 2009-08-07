@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use base 'Catalyst::Model::Adaptor::Base';
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 sub COMPONENT {
     my ($class, $app, @rest) = @_;
