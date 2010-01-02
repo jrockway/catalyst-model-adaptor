@@ -42,7 +42,7 @@ Then you can use C<NotMyApp::Class> from your Catalyst app:
         $someclass->method; # yay
     }
 
-Note that C<NotMyApp::Class> is instantiated at application startup
+Note that C<NotMyApp::SomeClass> is instantiated at application startup
 time.  If you want the adapted class to be created for call to C<<
 $c->model >>, see L<Catalyst::Model::Factory> instead.  If you want
 the adapted class to be created once per request, see
