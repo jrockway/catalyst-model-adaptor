@@ -1,6 +1,6 @@
 Change history for Catalyst::Model::Adaptor
 
-?.??   ?
+0.06   3 January 2010
        - Fix a minor documentation problem. Reported by Cory Watson.
 
 0.05   7 August 2009
