@@ -1,5 +1,9 @@
 Change history for Catalyst::Model::Adaptor
 
+0.08   9 Febuary 2010
+       - Correctly built distribution. MANIFEST.SKIP fixed to avoid the issue
+         in future.
+
 0.07   9 Febuary 2010
        - Catalyst::Runtime is a runtime dependency. RT#48842
 
