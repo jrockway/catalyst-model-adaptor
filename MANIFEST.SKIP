@@ -7,3 +7,4 @@ MANIFEST.SKIP~
 cover_db
 Makefile$
 Makefile.old$
+^Catalyst-Model-Adaptor
